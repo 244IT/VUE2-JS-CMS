@@ -6,10 +6,12 @@ const DEAFULT_LOADING = true
 
 class CHHRequest {
   constructor(config) {
+    console.log('config')
     // 创建axios实例
     this.instance = axios.create(config)
     // 保存基本信息
     this.showLoading = config.showLoading ?? DEAFULT_LOADING
+    this.cShowLoading = config.showLoading ?? DEAFULT_LOADING
 
     // 实例的拦截器
     this.instance.interceptors.request.use(
@@ -25,8 +27,7 @@ class CHHRequest {
     // 全局的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        // console.log("全局请求拦截器")
-        // console.log(this.showLoading)
+        console.log("全局请求拦截器")
         if (this.showLoading) {
           this.loading = Loading.service({
             lock: true,
@@ -44,8 +45,6 @@ class CHHRequest {
 
     this.instance.interceptors.response.use(
       (res) => {
-        // console.log("全局响应拦截器")
-
         // 将loading移除
         this.loading?.close()
 
@@ -77,11 +76,10 @@ class CHHRequest {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
+      console.log('请求')
 
       // 判断是否需要显示loading
-      if (config.showLoading === false) {
-        this.showLoading = config.showLoading
-      }
+      this.showLoading = config.showLoading ?? this.cShowLoading
 
       this.instance
         .request(config)
@@ -91,17 +89,13 @@ class CHHRequest {
             res = config.interceptors.responseInterceptor(res)
           }
 
-          // 2.将showLoading设置true, 这样不会影响下一个请求
-          this.showLoading = DEAFULT_LOADING
-
-          // 3.将结果resolve返回出去
           resolve(res)
         })
         .catch((err) => {
-          // 将showLoading设置true, 这样不会影响下一个请求
-          this.showLoading = DEAFULT_LOADING
           reject(err)
           return err
+        }).finally(() => {
+          this.showLoading = this.cShowLoading
         })
     })
   }

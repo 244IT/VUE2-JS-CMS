@@ -20,8 +20,8 @@
 export default {
   props: {
     panelData: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     }
   }
 };

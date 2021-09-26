@@ -1,6 +1,6 @@
 <template>
   <el-container class="main">
-    <el-aside :width="isFlod ? '60px' : '200px'">
+    <el-aside :width="isFlod ? '60px' : '210px'">
       <nav-menu :isCollapse="isFlod" />
     </el-aside>
     <el-container>

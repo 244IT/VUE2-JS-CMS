@@ -8,7 +8,7 @@ const chhRequest = new CHHRequest({
   showLoading: false,
   interceptors: {
     requestInterceptor(config) {
-      console.log("请求拦截")
+      console.log("实例请求拦截")
       // 携带token的拦截
       const token = localCache.getCache("token")
       if (token) {

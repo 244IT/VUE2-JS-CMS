@@ -11,7 +11,7 @@ const DashboardAPI = {
 
 export function getCategoryGoodsCount() {
   return chhRequest.get({
-    url: DashboardAPI.categoryGoodsCount
+    url: DashboardAPI.categoryGoodsCount,
   })
 }
 
