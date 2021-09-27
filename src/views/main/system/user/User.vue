@@ -5,15 +5,15 @@
       @onReset="onReset"
       @onSearch="onSearch"
     />
-    <!-- <page-content
-      :searchContentConfig="searchContentConfig"
+    <page-content
+      :contentConfig="contentConfig"
       pageName="users"
       ref="pageContentRef"
       @onCreate="onCreate"
       @onEdit="onEdit"
     />
 
-    <page-modal
+    <!-- <page-modal
       ref="pageModalRef"
       pageName="users"
       :modalConfig="modalConfigRef"
@@ -24,21 +24,29 @@
 
 <script>
 import PageSearch from "@/components/content/pageSearch";
+import PageContent from "@/components/content/pageContent";
 import { searchConfig } from "./config/search";
+import { contentConfig } from "./config/content";
 export default {
   components: {
-    PageSearch
+    PageSearch,
+    PageContent
   },
   data() {
     return {
-      searchConfig
+      searchConfig,
+      contentConfig
     };
   },
   methods: {
     /* 点击重置 */
     onReset() {},
     /* 点击搜索 */
-    onSearch() {}
+    onSearch() {},
+    /* 创建用户 */
+    onCreate() {},
+    /* 编辑用户 */
+    onEdit() {}
   }
 };
 </script>

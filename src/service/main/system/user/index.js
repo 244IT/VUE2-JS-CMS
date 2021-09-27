@@ -1,4 +1,4 @@
-import { chhRequest } from "../../index"
+import { chhRequest } from "../../../index"
 
 /* 获取用户列表 */
 export function getList(url, list) {

@@ -46,9 +46,9 @@
         <el-pagination
           @size-change="onSizeChange"
           @current-change="onCurrentChange"
-          :current-page="page.currentPage + 1"
+          :current-page="pageInfo.currentPage + 1"
           :page-sizes="[10, 20, 30, 40]"
-          :page-size="page.pageSize"
+          :page-size="pageInfo.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="listCount"
         >
@@ -63,7 +63,7 @@ export default {
   props: {
     listData: {
       type: Array,
-      required: true
+      default: () => []
     },
     listCount: {
       type: Number,
@@ -101,13 +101,18 @@ export default {
   data() {
     return {};
   },
+  created() {
+    console.log("chhTable created");
+    console.log(this.listData);
+    console.log(this.listCount);
+  },
   methods: {
     onSizeChange(pageSize) {
-      this.$emit("onSizeChange", { ...this.pageInfo.page, pageSize });
+      this.$emit("onSizeChange", { ...this.pageInfo, pageSize });
     },
     onCurrentChange(currentPage) {
       this.$emit("onCurrentChange", {
-        ...this.pageInfo.page,
+        ...this.pageInfo,
         currentPage: currentPage - 1
       });
     }

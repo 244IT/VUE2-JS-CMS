@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 
 import login from './login/index'
+import system from './main/system/index'
 Vue.use(Vuex)
 
 
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
     }
   },
   modules: {
-    login
+    login,
+    system
   }
 })
 
