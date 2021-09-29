@@ -2,19 +2,19 @@
 export const dependencies= [
   {
     name: "vue",
-    description: "^3.0.5"
+    description: "^2.6.11"
   },
   {
     name: "vue-router",
-    description: "^4.0.6"
+    description: "^3.5.2"
   },
   {
     name: "vuex",
-    description: "^4.0.0"
+    description: "^3.6.2"
   },
   {
     name: "axios",
-    description: "^0.21.1"
+    description: "^0.21.4"
   },
   {
     name: "element-plus",
@@ -35,7 +35,7 @@ export const dependencies= [
     description: "^0.2.4"
   },
   {
-    name: "EChart",
+    name: "echarts",
     description: "^5.1.1"
   },
 

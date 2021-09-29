@@ -52,3 +52,20 @@ export function pathMapToMenu(userMenus,currentPath,breadcrumbs) {
   }
 }
 
+
+export function mapMenuToLeftKeys(menuList) {
+  const leftKeys = []
+  console.log("mapMenuToLeftKeys")
+  console.log(menuList)
+  const _recurseGetLeftKey = (menus) => {
+    for (const menu of menus) {
+      if (menu.children) {
+        _recurseGetLeftKey(menu.children)
+      } else {
+        leftKeys.push(menu.id)
+      }
+    }
+  }
+  _recurseGetLeftKey(menuList)
+  return leftKeys
+}

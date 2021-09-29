@@ -2,7 +2,13 @@
   <div class="nav-menu">
     <div class="logo">
       <img class="img" src="~@/assets/img/login/logo.svg" alt="logo" />
-      <span v-if="!isCollapse" class="title">Vue2+JS</span>
+      <span
+        @touchstart="touchstart"
+        @touchend="touchend"
+        v-if="!isCollapse"
+        class="title"
+        >Vue2+JS</span
+      >
     </div>
     <el-menu
       :default-active="menuActive + ''"
@@ -35,7 +41,8 @@ export default {
   data() {
     return {
       menuList: [],
-      menuActive: ""
+      menuActive: "",
+      loop: 0
     };
   },
   props: {
@@ -56,6 +63,18 @@ export default {
       this.$router.push({
         path: menu.url ?? "/notFound"
       });
+    },
+
+    touchstart(res) {
+      clearTimeout(this.loop); //再次清空定时器，防止重复注册定时器
+      this.loop = setTimeout(() => {
+        console.log("长按了");
+        console.log(res);
+        res.preventDefault();
+      }, 1000);
+    },
+    touchend() {
+      clearTimeout(this.loop);
     }
   }
 };
@@ -83,6 +102,7 @@ export default {
       font-size: 16px;
       font-weight: 700;
       color: white;
+      user-select: none;
     }
   }
 

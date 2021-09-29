@@ -21,8 +21,6 @@ export default {
   },
   computed: {
     option() {
-      console.log("computed");
-      console.log(this.lineXData);
       return {
         xAxis: {
           type: "category",

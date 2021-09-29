@@ -22,4 +22,21 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped>
+.chh-card {
+  &:deep(.el-card__header) {
+    padding: 10px 20px !important;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+.item {
+  margin-bottom: 10px;
+}
+</style>

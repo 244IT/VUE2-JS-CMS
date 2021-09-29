@@ -39,10 +39,13 @@ import {
     Tooltip,
     Descriptions,
     DescriptionsItem,
-    Tag
+    Tag,
+    Message,
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+
+Vue.prototype.$message = Message
 const components = [
     Button,
     Aside,
@@ -85,6 +88,8 @@ const components = [
     DescriptionsItem,
     Tag
 ]
+
+
 
 export default function () {
     for (const cpn of components) {

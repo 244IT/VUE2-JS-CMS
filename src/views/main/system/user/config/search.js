@@ -2,7 +2,7 @@
 export const searchConfig = {
   labelWidth: '120px',
   itemStyle: {
-    padding: '10px 40px'
+    padding: '10px 20px'
   },
   colLayout: {
     span: 8

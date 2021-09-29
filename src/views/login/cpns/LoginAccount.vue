@@ -39,7 +39,6 @@ export default {
       const formRef = this.$refs.formRef;
       formRef.validate(async valid => {
         if (valid) {
-          console.log("登陆");
           // 校验通过，执行登陆逻辑
           if (isKeepPassword) {
             localCache.setCache("password", this.user.password);
@@ -55,9 +54,11 @@ export default {
             password
           });
           const { id, token } = tokenResult.data;
+          // 获取token
           localCache.setCache("token", token);
           this.$store.commit("saveToken", token);
-
+          // 获取部门和角色列表
+          this.$store.dispatch("getInitialDataAction", null, { root: true });
           // 获取用户信息
           const userResult = await getUserInfoById(id);
           const userInfo = userResult.data;

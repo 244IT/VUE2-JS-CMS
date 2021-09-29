@@ -38,14 +38,12 @@ export default {
     };
   },
   created() {
-    console.log("created");
     const formItems = this.searchConfig?.formItems ?? [];
     const originFormData = {};
     for (let prop of formItems) {
       originFormData[prop.field] = "";
     }
     this.formData = originFormData;
-    console.log(this.formData);
   },
   methods: {
     onChangeValue(formData) {
@@ -55,7 +53,6 @@ export default {
       for (let key in this.formData) {
         this.formData[key] = "";
       }
-      console.log(this.formData);
       this.$emit("onReset");
     },
     onSearch() {
@@ -67,7 +64,7 @@ export default {
         }
       }
       if (isEmpty) return;
-      this.$emit("onSearch");
+      this.$emit("onSearch", this.formData);
     }
   }
 };
@@ -75,11 +72,9 @@ export default {
 
 <style lang="scss" scoped>
 .page-search {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  display: block;
   padding: 20px;
+  margin-bottom: 20px;
   border-radius: 10px;
   background-color: #fff;
   .header {

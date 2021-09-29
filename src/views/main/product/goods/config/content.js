@@ -1,4 +1,4 @@
-export const searchContentConfig = {
+export const contentConfig = {
   title: "商品列表",
   createText: "新建商品",
   module: "systemModule",

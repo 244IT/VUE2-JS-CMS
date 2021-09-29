@@ -1,4 +1,4 @@
-export const searchContentConfig = {
+export const contentConfig = {
   title: "角色列表",
   createText: "新建角色",
   module: "systemModule",

@@ -33,6 +33,7 @@ const loginModule = {
         const token = localCache.getCache('token')
         if(token) {
           context.commit('saveToken', token)
+          context.dispatch("getInitialDataAction", null, { root: true }) // 获取部门和角色列表
         }
         const userInfo = localCache.getCache('userInfo')
         if(userInfo) {

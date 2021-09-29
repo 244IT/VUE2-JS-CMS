@@ -101,11 +101,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log("chhTable created");
-    console.log(this.listData);
-    console.log(this.listCount);
-  },
+  created() {},
   methods: {
     onSizeChange(pageSize) {
       this.$emit("onSizeChange", { ...this.pageInfo, pageSize });

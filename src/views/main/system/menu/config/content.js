@@ -1,4 +1,4 @@
-export const searchContentConfig = {
+export const contentConfig = {
   title: "菜单列表",
   createText: "新建菜单",
   module: "systemModule",

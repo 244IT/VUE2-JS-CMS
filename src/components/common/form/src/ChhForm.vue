@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     onChangeValue(field, value) {
+      console.log("onChangeValue");
       this.$emit("onChangeValue", { ...this.formData, [field]: value });
     }
   }

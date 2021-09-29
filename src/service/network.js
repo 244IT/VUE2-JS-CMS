@@ -1,12 +1,12 @@
 import axios from "axios"
 
 import { Loading } from "element-ui"
+import { Message } from 'element-ui';
 
 const DEAFULT_LOADING = true
 
 class CHHRequest {
   constructor(config) {
-    console.log('config')
     // 创建axios实例
     this.instance = axios.create(config)
     // 保存基本信息
@@ -27,7 +27,7 @@ class CHHRequest {
     // 全局的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log("全局请求拦截器")
+        // console.log("全局请求拦截器")
         if (this.showLoading) {
           this.loading = Loading.service({
             lock: true,
@@ -50,8 +50,9 @@ class CHHRequest {
 
         const data = res.data
         // 不同的后端定义的具体状态码显示不同的错误信息
-        if (data.returnCode === "-1001") {
-          console.log("请求失败~, 错误信息")
+        if (data.code !== 0) {
+          Message(data.data)
+          return new Error(data.data)
         } else {
           return data
         }
@@ -76,8 +77,6 @@ class CHHRequest {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
-      console.log('请求')
-
       // 判断是否需要显示loading
       this.showLoading = config.showLoading ?? this.cShowLoading
 

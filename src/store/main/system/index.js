@@ -5,13 +5,7 @@ import {
   getList
 } from "../../../service/main/system/user"
 
-
-const mapToUrl = {
-  users: "/users/list",
-  role: "/role/list",
-  goods: "/goods/list",
-  menu: "/menu/list"
-}
+import { Message } from "element-ui"
 
 const system = {
   namespaced: true,
@@ -24,13 +18,16 @@ const system = {
       goodsList: [], // 商品列表
       goodsCount: 0, // 商品数量
       menuList: [], // 菜单列表
-      menuCount: 0 // 菜单数量
+      menuCount: 0, // 菜单数量
+      departmentList: [], // 部门列表
+      departmentCount: 0, // 部门数量
+      categoryList: [], // 商品分类列表
+      categoryCount: 0, // 商品分类数量
     }
   },
   getters: {
     /* 获取列表数据 */
     pageListData(state) {
-      console.log('获取列表数据')
       return (pageName) => {
         return {
           pageList: state[`${pageName}List`],
@@ -63,15 +60,25 @@ const system = {
     },
     saveMenuCount(state, menuCount) {
       state.menuCount = menuCount
-    }
+    },
+    saveDepartmentList(state, departmentList) {
+      state.departmentList = departmentList
+    },
+    saveDepartmentCount(state, departmentCount) {
+      state.departmentCount = departmentCount
+    },
+    saveCategoryList(state, categoryList) {
+      state.categoryList = categoryList
+    },
+    saveCategoryCount(state, categoryCount) {
+      state.categoryCount = categoryCount
+    },
   },
   actions: {
     /* 获取列表 */
     async getListAction({ commit }, payload) {
-      console.log('getListAction')
-      console.log(payload)
       const { pageName, pageQuery } = payload
-      const url = mapToUrl[pageName]
+      const url = `/${pageName}/list`
       // 用户登陆
       const result = await getList(url, pageQuery)
 
@@ -103,6 +110,9 @@ const system = {
       const url = `/${pageName}`
       await createListItem(url, newData)
 
+      Message.success({
+        message: '创建成功'
+      })
       // 重新获取列表
       dispatch("getListAction", {
         pageName,
@@ -118,7 +128,9 @@ const system = {
       const { pageName, editData, id } = payload
       const url = `/${pageName}/${id}`
       await editListItem(url, editData)
-
+      Message.success({
+        message: '修改成功'
+      })
       // 重新获取列表
       dispatch("getListAction", {
         pageName,
