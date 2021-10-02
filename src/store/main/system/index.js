@@ -6,6 +6,7 @@ import {
 } from "../../../service/main/system/user"
 
 import { Message } from "element-ui"
+import { firstToUpper } from "@/utils/util"
 
 const system = {
   namespaced: true,
@@ -84,8 +85,8 @@ const system = {
 
       const { list, totalCount } = result.data
 
-      commit(`save${_firstToUpper(pageName)}List`, list)
-      commit(`save${_firstToUpper(pageName)}Count`, totalCount)
+      commit(`save${firstToUpper(pageName)}List`, list)
+      commit(`save${firstToUpper(pageName)}Count`, totalCount)
     },
 
     /* 删除列表项 */
@@ -143,17 +144,6 @@ const system = {
   }
 }
 
-/* 首字母转大写 */
-const _firstToUpper = (text) => {
-  return text
-    .split("")
-    .map((item, index) => {
-      if (index === 0) {
-        return item.toLocaleUpperCase()
-      }
-      return item
-    })
-    .join("")
-}
+
 
 export default system

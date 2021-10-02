@@ -18,6 +18,23 @@
           >{{ contentConfig.createText }}</el-button
         >
       </template>
+      <template #oldPrice="scope">
+        <div size="mini" type="primary">
+          {{ "¥" + scope.row.oldPrice }}
+        </div>
+      </template>
+      <template #newPrice="scope">
+        <div>
+          {{ "¥" + scope.row.newPrice }}
+        </div>
+      </template>
+      <template #image="scope">
+        <el-image
+          style="width: 60px; height: 60px"
+          :src="scope.row.imgUrl"
+          :preview-src-list="[scope.row.imgUrl]"
+        ></el-image>
+      </template>
       <template #status="scope">
         <el-button
           size="mini"
@@ -51,7 +68,6 @@
         </div>
       </template>
       <!-- 跨组件插槽 -->
-
       <!-- <template
         v-for="item in otherPropSlots"
         :key="item.prop"

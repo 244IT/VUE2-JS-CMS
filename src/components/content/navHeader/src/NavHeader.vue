@@ -7,19 +7,21 @@
     ></i>
     <div class="content">
       <chh-breadcrumb :breadcrumbs="breadcrumbs" />
-      <!-- <user-info /> -->
+      <user-info />
     </div>
   </div>
 </template>
 
 <script>
 import ChhBreadcrumb from "@/components/common/breadcrumb";
+import UserInfo from "./UserInfo.vue";
 
 import { pathMapBreadcrumbs } from "@/utils/mapMenus";
 
 export default {
   components: {
-    ChhBreadcrumb
+    ChhBreadcrumb,
+    UserInfo
   },
   data() {
     return {

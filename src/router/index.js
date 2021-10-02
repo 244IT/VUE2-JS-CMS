@@ -19,17 +19,24 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log("beforeEach")
+  console.log(to)
+  console.log(localCache.getCache("token"))
   // 跳转到其他页面，校验token
   if (to.path !== "/login") {
+    console.log('111')
     const token = localCache.getCache("token")
     if (!token) {
       next({ name: 'login'})
     }
+
+    if (to.path === "/main") {
+      console.log('222')
+      next({ path: firstMenu.url })
+    }
   }
 
-  if (to.path === "/main") {
-    next({ path: firstMenu.url })
-  }
+
   next()
 })
 
