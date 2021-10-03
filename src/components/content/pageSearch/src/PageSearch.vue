@@ -59,7 +59,7 @@ export default {
       // 为空不搜索
       let isEmpty = true;
       for (let key in this.formData) {
-        if (this.formData[key].trim() !== "") {
+        if (this.formData[key] !== "") {
           isEmpty = false;
         }
       }

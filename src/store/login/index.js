@@ -21,10 +21,13 @@ const loginModule = {
       saveMenuInfo(state, menuInfo) {
         state.menuInfo = menuInfo
         const routes = mapToMenuRoutes(menuInfo)
+        const routers = router.getRoutes()
         // 动态添加路由
         routes.forEach((route) => {
+          if(routers.find(item => item.name === route.name)) return
           router.addRoute("main", route)
         })
+        if(routers.find(item => item.name === 'notFount')) return
         router.addRoute({path: '/:pathMatch(.*)*', name: 'notFount', component: () => import('@/views/notFount/NotFount.vue')})
       }
     },

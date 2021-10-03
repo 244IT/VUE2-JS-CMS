@@ -3,21 +3,25 @@
     <el-card>
       <div class="header">
         <span>{{ panelData.name }}</span>
-
         <el-tooltip :content="panelData.tips" placement="top">
           <i class="el-icon-warning-outline"></i>
         </el-tooltip>
       </div>
-      <div class="content" ref="contentRef">
-        {{ panelData.value }}
+      <div class="content">
+        <countup :count="panelData.value" />
       </div>
-      <div class="bottom">{{ panelData.name }} {{ panelData.value }}</div>
+      <div class="bottom">
+        {{ panelData.name }} <countup :count="panelData.value" />
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import Countup from "@/components/common/countup";
+
 export default {
+  components: { Countup },
   props: {
     panelData: {
       type: Object,

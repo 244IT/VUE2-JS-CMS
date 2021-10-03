@@ -109,11 +109,6 @@ export default {
       return this.$store.getters[`system/pageListData`](this.pageName);
     }
   },
-  watch: {
-    pageInfo() {
-      // this.getListData();
-    }
-  },
   created() {
     /* 获取权限 */
     // this.isCreate = this._getPermission(this.pageName, "create");

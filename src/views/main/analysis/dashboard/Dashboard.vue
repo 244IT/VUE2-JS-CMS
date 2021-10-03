@@ -65,7 +65,12 @@ export default {
   },
   data() {
     return {
-      statisticData: [],
+      statisticData: [
+        { name: "商品总销量", value: 0 },
+        { name: "商品总收藏", value: 0 },
+        { name: "商品总库存", value: 0 },
+        { name: "商品总销售额", value: 0 }
+      ],
       addressGoodSaleData: [],
       categoryGoodFaverData: [],
       categoryGoodSaleData: [],
@@ -73,18 +78,14 @@ export default {
     };
   },
   created() {
-    this.getEchartData();
+    this._initData();
   },
   methods: {
     /* -----------------------------网络请求---------------------------- */
-    /* 获取图表数据 */
-    async getEchartData() {
+
+    // 获取统计数据
+    async getGoodsStatistics() {
       const statisticResult = await API.getGoodsStatistics();
-      const addressGoodSaleResult = await API.getAddressGoodsSale();
-      const categoryGoodFaverResult = await API.getCategoryGoodsFavor();
-      const categoryGoodSaleResult = await API.getCategoryGoodsSale();
-      const categoryGoodsResult = await API.getCategoryGoodsCount();
-      // 统计数据
       this.statisticData = (function() {
         const statistic = statisticResult.data;
         return statistic.map(item => ({
@@ -93,7 +94,11 @@ export default {
           tips: item.tips
         }));
       })();
-      // 地区销售量
+    },
+    // 地区销售量
+    async getAddressGoodsSale() {
+      const addressGoodSaleResult = await API.getAddressGoodsSale();
+
       this.addressGoodSaleData = (function() {
         const addressGoodSale = addressGoodSaleResult.data;
         return addressGoodSale.map(item => ({
@@ -101,8 +106,11 @@ export default {
           value: item.count
         }));
       })();
+    },
+    // 分类商品收藏
+    async getCategoryGoodsFavor() {
+      const categoryGoodFaverResult = await API.getCategoryGoodsFavor();
 
-      // 分类商品收藏
       this.categoryGoodFaverData = (function() {
         const categoryGoodFaver = categoryGoodFaverResult.data;
         return {
@@ -110,6 +118,10 @@ export default {
           barXData: categoryGoodFaver.map(item => item.name)
         };
       })();
+    },
+    // 获取统计数据
+    async getCategoryGoodsSale() {
+      const categoryGoodSaleResult = await API.getCategoryGoodsSale();
       // 分类商品销量
       this.categoryGoodSaleData = (function() {
         const categoryGoodsSale = categoryGoodSaleResult.data;
@@ -118,13 +130,26 @@ export default {
           lineXData: categoryGoodsSale.map(item => item.name)
         };
       })();
-      // 分类商品库存
+    },
+    // 分类商品库存
+    async getCategoryGoodsCount() {
+      const categoryGoodsResult = await API.getCategoryGoodsCount();
+
       this.categoryGoodsData = (function() {
         const categoryGoodsSale = categoryGoodsResult.data;
         return categoryGoodsSale.map(item => {
           return { name: item.name, value: item.goodsCount };
         });
       })();
+    },
+    /* --------------------------------------页面方法--------------------------------- */
+    /* 初始化数据 */
+    _initData() {
+      this.getGoodsStatistics();
+      this.getAddressGoodsSale();
+      this.getCategoryGoodsFavor();
+      this.getCategoryGoodsSale();
+      this.getCategoryGoodsCount();
     }
   }
 };

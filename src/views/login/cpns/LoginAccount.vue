@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import router from "@/router";
-
 import {
   accountLogin,
   getUserInfoById,
@@ -70,9 +68,11 @@ export default {
           const menuInfo = menuResult.data;
           localCache.setCache("menuInfo", menuInfo);
           this.$store.commit("saveMenuInfo", menuInfo);
-
+          // 获取第一个菜单
+          const mapMenus = await import("@/utils/mapMenus");
+          localCache.setCache("menuActive", mapMenus.firstMenu.id);
           // 跳转首页
-          router.push("/main");
+          this.$router.push(mapMenus.firstMenu.url);
         }
       });
     }

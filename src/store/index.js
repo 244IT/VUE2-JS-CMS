@@ -12,6 +12,7 @@ const store = new Vuex.Store({
   state() {
       return {
         currentPath: '',
+        currentPathId: 0,
         entireDepartment: [],
         entireRole: [],
         entireMenu: []

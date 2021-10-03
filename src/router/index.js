@@ -2,14 +2,19 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import store from '@/store'
 
-import { firstMenu } from "@/utils/mapMenus"
 import localCache from "@/utils/cache"
 Vue.use(VueRouter)
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+
 const routes = [
     {path: '/', redirect: '/login'},
     {path: '/login', name: 'login', component: () => import('@/views/login/Login.vue')},
     {path: '/main', name: 'main',component: () => import('@/views/main/Main.vue')},
-
 ]
 
 
@@ -19,25 +24,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log("beforeEach")
-  console.log(to)
-  console.log(localCache.getCache("token"))
   // 跳转到其他页面，校验token
   if (to.path !== "/login") {
-    console.log('111')
     const token = localCache.getCache("token")
     if (!token) {
       next({ name: 'login'})
+    }else {
+      next()
     }
-
-    if (to.path === "/main") {
-      console.log('222')
-      next({ path: firstMenu.url })
-    }
+  }else {
+    next()
   }
-
-
-  next()
 })
 
 router.afterEach((to) => {

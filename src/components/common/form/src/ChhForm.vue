@@ -33,6 +33,7 @@
                   v-for="option in item.options"
                   :key="option.value"
                   :value="option.value"
+                  :label="option.title"
                   >{{ option.title }}</el-option
                 >
               </el-select>
@@ -41,7 +42,7 @@
               <el-date-picker
                 style="width: 100%"
                 v-bind="item.otherOptions"
-                :value="formData[item.field]"
+                v-model="formData[item.field]"
                 @change="value => onChangeValue(item.field, value)"
               ></el-date-picker>
             </template>
