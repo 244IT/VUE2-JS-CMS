@@ -2,8 +2,8 @@
   <div class="overview">
     <chh-card title="关于">
       <div class="c-left">
-        Vue2Admin 是基于 Vue2、Vuex、VueRouter、Vite、 Element
-        、JavaScript、Echart5 等后台系统解决方案。
+        Vue2Admin 是基于 Vue2、Vuex、VueRouter、Element 、JavaScript、Echart5
+        等后台系统解决方案。
       </div>
     </chh-card>
 

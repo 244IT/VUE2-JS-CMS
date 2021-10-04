@@ -24,8 +24,8 @@ export default {
   data() {
     return {
       user: {
-        name: localCache.getCache("username") ?? "",
-        password: localCache.getCache("password") ?? ""
+        name: localCache.getCache("username") ?? "coderwhy",
+        password: localCache.getCache("password") ?? "123456"
       },
       rules
     };
