@@ -18,6 +18,7 @@
       pageName="department"
       :modalConfig="modalConfig"
       :defaultInfo="defaultInfo"
+      :handleType="handleType"
     ></page-modal>
   </div>
 </template>
@@ -31,15 +32,17 @@ import pageContent from "@/components/content/pageContent";
 import { modalConfig } from "./config/modal";
 import { searchConfig } from "./config/search";
 import { contentConfig } from "./config/content";
+/* mixin */
+import { handleContentMixin } from "@/mixin/handleContentMixin";
 
 const HANDLE_CREATE = "create"; // 新增操作
-const HANDLE_EDIT = "edit"; // 编辑操作
 export default {
   components: {
     pageModal,
     pageSearch,
     pageContent
   },
+  mixins: [handleContentMixin],
   data() {
     return {
       searchConfig,
@@ -58,28 +61,6 @@ export default {
         value: item.id
       }));
       return modalConfig;
-    }
-  },
-  methods: {
-    /* 点击重置 */
-    onReset() {
-      this.$refs.pageContentRef.getListData();
-    },
-    /* 点击搜索 */
-    onSearch(formData) {
-      this.$refs.pageContentRef.getListData(formData);
-    },
-    /* 创建部门 */
-    onCreate() {
-      this.$refs.pageModalRef.showDialog = true;
-      this.handleType = HANDLE_CREATE;
-      this.defaultInfo = {};
-    },
-    /* 编辑部门 */
-    onEdit(formData) {
-      this.$refs.pageModalRef.showDialog = true;
-      this.handleType = HANDLE_EDIT;
-      this.defaultInfo = formData;
     }
   }
 };

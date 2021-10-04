@@ -39,8 +39,12 @@
         <el-button
           size="mini"
           plain
-          :type="scope.row.enable ? 'success' : 'danger'"
-          >{{ scope.row.enable ? "启用" : "禁用" }}</el-button
+          :type="
+            scope.row.enable || scope.row.status === 1 ? 'success' : 'danger'
+          "
+          >{{
+            scope.row.enable || scope.row.status === 1 ? "启用" : "禁用"
+          }}</el-button
         >
       </template>
       <template #createAt="scope">

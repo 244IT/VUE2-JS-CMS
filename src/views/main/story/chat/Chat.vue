@@ -1,6 +1,6 @@
 <template>
   <div>
-    chat
+    开发中...
   </div>
 </template>
 

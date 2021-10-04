@@ -1,6 +1,6 @@
 <template>
   <div>
-    list
+    开发中...
   </div>
 </template>
 

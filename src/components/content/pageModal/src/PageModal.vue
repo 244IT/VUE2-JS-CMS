@@ -1,7 +1,7 @@
 <template>
   <div class="page-model">
     <el-dialog
-      :title="modalConfig.title"
+      :title="title"
       :visible="showDialog"
       width="30%"
       destroy-on-close
@@ -49,6 +49,10 @@ export default {
     othreInfo: {
       typeof: Object,
       default: () => ({})
+    },
+    handleType: {
+      type: String,
+      default: "create"
     }
   },
   data() {
@@ -57,14 +61,20 @@ export default {
       formData: {}
     };
   },
+  computed: {
+    title() {
+      const titleEnum = {
+        create: "新建",
+        edit: "编辑"
+      };
+      return titleEnum[this.handleType] + this.modalConfig.title;
+    }
+  },
   created() {},
   watch: {
     defaultInfo: {
       handler(newValue) {
-        console.log("新值");
-        console.log(newValue);
         for (const item of this.modalConfig?.formItems) {
-          // this.formData[`${item.field}`] = newValue[`${item.field}`];
           // 动态添加formData属性，否则modal值无法及时响应视图
           this.$set(this.formData, item.field, newValue[`${item.field}`]);
         }
@@ -82,7 +92,6 @@ export default {
           id: this.defaultInfo.id
         });
       } else {
-        console.log("confirm create");
         this.$store.dispatch("system/createListItemAction", {
           pageName: this.pageName,
           newData: { ...this.formData, ...this.othreInfo }
@@ -95,7 +104,6 @@ export default {
       this.formData = formData;
     },
     onClose() {
-      console.log("onClose");
       this.showDialog = false;
     }
   }

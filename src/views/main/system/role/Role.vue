@@ -18,6 +18,7 @@
       :modalConfig="modalConfig"
       :othreInfo="othreInfo"
       :defaultInfo="defaultInfo"
+      :handleType="handleType"
     >
       <div class="role-tree">
         <el-tree
@@ -45,8 +46,9 @@ import { modalConfig } from "./config/modal";
 import { searchConfig } from "./config/search";
 /* 工具 */
 import { mapMenuToLeftKeys } from "@/utils/mapMenus";
+/* mixin */
+import { handleContentMixin } from "@/mixin/handleContentMixin";
 
-const HANDLE_CREATE = "create"; // 新增操作
 const HANDLE_EDIT = "edit"; // 编辑操作
 export default {
   components: {
@@ -54,13 +56,15 @@ export default {
     pageModal,
     pageSearch
   },
+  mixins: [handleContentMixin],
   data() {
     return {
       contentConfig,
       modalConfig,
       searchConfig,
       othreInfo: {},
-      defaultInfo: {}
+      defaultInfo: {},
+      handleType: ""
     };
   },
   computed: {
@@ -69,32 +73,18 @@ export default {
     }
   },
   methods: {
+    /* 选中菜单权限 */
     onCheckMenu(data, checkData) {
       const checkedKeys = checkData.checkedKeys;
       const halfCheckedKeys = checkData.halfCheckedKeys;
       const menuList = [...checkedKeys, ...halfCheckedKeys];
       this.othreInfo = { menuList };
     },
-    /* 点击重置 */
-    onReset() {
-      this.$refs.pageContentRef.getListData();
-    },
-    /* 点击搜索 */
-    onSearch(formData) {
-      this.$refs.pageContentRef.getListData(formData);
-    },
-    /* 创建角色 */
-    onCreate() {
-      this.$refs.pageModalRef.showDialog = true;
-      this.handleType = HANDLE_CREATE;
-      this.defaultInfo = {};
-    },
     /* 编辑角色 */
     onEdit(formData) {
       this.$refs.pageModalRef.showDialog = true;
       this.handleType = HANDLE_EDIT;
       this.defaultInfo = formData;
-
       // 取菜单数组的叶子节点
       const leafKeys = mapMenuToLeftKeys(formData.menuList);
       this.$nextTick(() => {

@@ -1,4 +1,5 @@
 export const modalConfig = {
+  title: "用户",
   formItems: [
     {
       field: "name",

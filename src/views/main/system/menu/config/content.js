@@ -1,6 +1,5 @@
 export const contentConfig = {
   title: "菜单列表",
-  createText: "新建菜单",
   module: "systemModule",
   propList: [
     { prop: "name", label: "菜单名称", minWidth: "100" },
@@ -20,7 +19,6 @@ export const contentConfig = {
       minWidth: "220",
       slotName: "updateAt"
     },
-    { label: "操作", minWidth: "120", slotName: "handler" }
   ],
   showIndexColumn: false,
   showSelectColumn: false,
