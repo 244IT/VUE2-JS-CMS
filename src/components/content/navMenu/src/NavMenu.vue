@@ -155,4 +155,10 @@ export default {
   width: 100%;
   height: calc(100% - 48px);
 }
+.el-menu--vertical {
+  .is-active {
+    color: #fff !important;
+    background-color: #0a60bd !important;
+  }
+}
 </style>

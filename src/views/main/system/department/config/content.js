@@ -10,5 +10,5 @@ export const contentConfig = {
     { label: '操作', minWidth: '120', slotName: 'handler' }
   ],
   showIndexColumn: true,
-  showSelectColumn: true
+  showSelectColumn: false
 }

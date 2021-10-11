@@ -4,9 +4,6 @@ export const searchConfig = {
   itemStyle: {
     padding: '10px 20px'
   },
-  colLayout: {
-    span: 8
-  },
   formItems: [
     {
       field: 'id',
