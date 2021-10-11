@@ -10,7 +10,7 @@ Vue2Admin 是基于 Vue2、Vuex、VueRouter、Element 、JavaScript、Echart5 �
 
 是coderwhy老师VUE3+TS+CMS项目的Vue2重构版
 
-网站参考地址：https://vue2jscms.chenhaohui.cn/main/system/user
+网站参考地址：https://vue2jscms.chenhaohui.cn
 
 ## 页面预览
 
